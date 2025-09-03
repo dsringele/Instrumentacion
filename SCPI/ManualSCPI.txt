@@ -1,0 +1,132 @@
+===============================
+IEEE 488.2 Common Commands
+===============================
+
+*IDN?
+  Descripción: Devuelve la identificación del instrumento (fabricante, modelo, número de serie, versión).
+  Ejemplo: *IDN?
+
+*RST
+  Descripción: Reinicia el instrumento a su configuración predeterminada.
+  Ejemplo: *RST
+
+*CLS
+  Descripción: Limpia el registro de errores y el byte de estado.
+  Ejemplo: *CLS
+
+*OPC / *OPC?
+  Descripción: Indica cuándo una operación se ha completado. *OPC? devuelve “1” al finalizar.
+  Ejemplo: *OPC?
+
+*TRG
+  Descripción: Envía un trigger (disparo) al instrumento.
+  Ejemplo: *TRG
+
+*TST?
+  Descripción: Ejecuta un autotest del sistema y devuelve el resultado.
+  Ejemplo: *TST?
+
+*ESR? / *ESE / *ESE?
+  Descripción: *ESR? devuelve el registro de estado estándar. *ESE configura qué bits del ESR activan interrupciones.
+  Ejemplo: *ESE 1
+
+*SRE / *SRE?
+  Descripción: Habilita bits del byte de servicio (SRQ). *SRE? devuelve el valor actual.
+  Ejemplo: *SRE 32
+
+*STB?
+  Descripción: Devuelve el byte de estado del instrumento.
+  Ejemplo: *STB?
+
+*PSC / *PSC?
+  Descripción: Permite guardar o no la configuración al apagar. (Depende del equipo).
+  Ejemplo: *PSC 1
+
+*SAV
+  Descripción: Guarda el estado actual del instrumento en memoria interna.
+  Ejemplo: *SAV 0
+
+*RCL
+  Descripción: Restaura un estado previamente guardado.
+  Ejemplo: *RCL 0
+
+*PRE / *PRE?
+  Descripción: Establece una máscara de protección de errores.
+  Ejemplo: *PRE 255
+
+*WAI
+  Descripción: Espera a que se completen todas las operaciones anteriores.
+  Ejemplo: *WAI
+
+*CAL
+  Descripción: Inicia un proceso de calibración. (Puede requerir condiciones especiales).
+  Ejemplo: *CAL
+
+Otros comandos específicos del fabricante:
+  *AAD, *DMC, *EMC, *EMC?, *DDT, *DDT?, *DLF, *GMC?, *OPT?, *PMC, *PCB, *PUD, *PUD?, *SDS, *RDT, *RDT?, *SRE, *STB, *WAI, *LRN?
+
+  NOTA: Algunos de estos comandos pueden no estar implementados o variar su función según el fabricante.
+
+===============================
+Mandatory SCPI 1999.0 Commands
+===============================
+
+:SYSTem:ERRor?
+  Descripción: Devuelve el último error registrado por el instrumento.
+  Ejemplo: :SYSTem:ERRor?
+
+:SYSTem:ERRor:NEXT?
+  Descripción: Devuelve el siguiente error en la cola, si existe.
+  Ejemplo: :SYSTem:ERRor:NEXT?
+
+:SYSTem:VERSion?
+  Descripción: Devuelve la versión del sistema SCPI del instrumento.
+  Ejemplo: :SYSTem:VERSion?
+
+:STATus:OPERation?
+  Descripción: Devuelve el estado de operación.
+  Ejemplo: :STATus:OPERation?
+
+:STATus:OPERation:CONDition?
+  Descripción: Devuelve las condiciones actuales del estado de operación.
+  Ejemplo: :STATus:OPERation:CONDition?
+
+:STATus:OPERation:ENABle
+  Descripción: Establece qué eventos de operación se pueden reportar.
+  Ejemplo: :STATus:OPERation:ENABle 16
+
+:STATus:OPERation:EVENt?
+  Descripción: Devuelve los eventos recientes en el estado de operación.
+  Ejemplo: :STATus:OPERation:EVENt?
+
+:STATus:QUEStionable?
+  Descripción: Devuelve el estado cuestionable actual.
+  Ejemplo: :STATus:QUEStionable?
+
+:STATus:QUEStionable:CONDition?
+  Descripción: Consulta la condición actual del estado cuestionable.
+  Ejemplo: :STATus:QUEStionable:CONDition?
+
+:STATus:QUEStionable:ENABle
+  Descripción: Habilita bits específicos del estado cuestionable.
+  Ejemplo: :STATus:QUEStionable:ENABle 4
+
+:STATus:QUEStionable:EVENt?
+  Descripción: Devuelve los eventos recientes del estado cuestionable.
+  Ejemplo: :STATus:QUEStionable:EVENt?
+
+:STATus:PRESet
+  Descripción: Restaura todos los registros de estado a su valor por defecto.
+  Ejemplo: :STATus:PRESet
+
+===============================
+Ejemplo de secuencia básica SCPI
+===============================
+
+*IDN?                          ← Identifica el instrumento
+*RST                           ← Reinicia el dispositivo
+:STATus:PRESet                 ← Limpia los registros de estado
+*CLS                           ← Borra errores anteriores
+:SYSTem:ERRor?                 ← Verifica si hay errores
+*OPC?                          ← Espera hasta que se completen operaciones
+
